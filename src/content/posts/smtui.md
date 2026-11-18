@@ -5,7 +5,7 @@ pubDate: 2026-11-18
 number: 1
 stack: ['Rust + ratatui', 'Linux · x86_64 / aarch64', 'runs in tmux', 'MIT']
 repo: 'https://github.com/hitaloose/smtui'
-draft: true
+draft: false
 ---
 
 I built smtui for my day job. I look after three servers over SSH, and a lot of that work is managing files and folders by hand: copying, moving, compressing, cleaning up, and pulling files back to my own machine. I wanted the ease of a desktop file manager without leaving the server, so I made one. I've used it every day since, and it has made that work much faster.
