@@ -44,12 +44,12 @@ const posts = await getPosts();
     <ul class="projects">
       {projects.map((p) => (
         <li class="project">
-          <h3><a href={p.repo}>{p.name}</a></h3>
+          <h3><a href={p.repo} target="_blank" rel="noopener noreferrer">{p.name}</a></h3>
           <p>{p.summary}</p>
           <div class="meta">
             <b>{p.stack}</b>
-            <a href={p.repo}>Code</a>
-            {p.demo && <a href={p.demo}>Try it</a>}
+            <a href={p.repo} target="_blank" rel="noopener noreferrer">Code</a>
+            {p.demo && <a href={p.demo} target="_blank" rel="noopener noreferrer">Try it</a>}
           </div>
         </li>
       ))}

@@ -28,8 +28,8 @@ const { title, description, pubDate, number, stack, repo, demo, draft } = post.d
     )}
     {(repo || demo) && (
       <div class="actions">
-        {repo && <a class="btn" href={repo}>Source code →</a>}
-        {demo && <a class="btn" href={demo}>Try it →</a>}
+        {repo && <a class="btn" href={repo} target="_blank" rel="noopener noreferrer">Source code →</a>}
+        {demo && <a class="btn" href={demo} target="_blank" rel="noopener noreferrer">Try it →</a>}
       </div>
     )}
     <div class="prose">
