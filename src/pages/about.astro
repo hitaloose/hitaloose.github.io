@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import Valve from '../components/Valve.astro';
+import { GITHUB_URL, LINKEDIN_URL } from '../consts';
+---
+<Base title="About" description="Hitalo Loose: backend engineer from Dois Vizinhos, Brazil, building tools around music and games.">
+  <section class="wrap about">
+    <Valve size={72} label="Hitalo Loose logo: an amp valve drawn as an 8-bit sprite" />
+    <h1>About</h1>
+    <div class="prose">
+      <p>I'm Hitalo Loose, a software engineer from Dois Vizinhos, Paraná, Brazil, with more than ten years of experience, mostly on the backend: TypeScript and Node.js in production, Rust and Go on my own projects.</p>
+      <p>At work I've led a campaign-analytics platform processing millions of events a day at Adgrowth, built backend systems at Fuerza Studio (including IBAMA's environmental-disaster alert system), and worked on integrations and low-latency systems for live commerce at Alive.</p>
+      <p>This blog is for the other stuff: the things I build around music, video games and the terminal. Each post is a write-up of one build, with what it does, how it works and what went wrong.</p>
+      <p>Find me on <a href={GITHUB_URL}>GitHub</a> and <a href={LINKEDIN_URL}>LinkedIn</a>.</p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .about { padding-block: 48px 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 22px; max-width: 800px; }
+  h1 { font-size: clamp(44px, 7vw, 72px); font-weight: 900; }
+</style>

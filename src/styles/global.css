@@ -1,0 +1,105 @@
+/* Hitalo Loose — dark, rock, DIY.
+   Valve green fills large areas; the glow green only marks small details, like a lit filament. */
+:root {
+  color-scheme: dark;
+  --stage: #070907;
+  --case: #0e120d;
+  --case-2: #141a12;
+  --bone: #e8e3d3;
+  --muted: #a3a596;
+  --line: #1f2a1c;
+  --valve: #022a01;
+  --glass: #3f7f2a;
+  --glow: #a8e07f;
+  --tape: #d9d2bd;
+  --tape-ink: #23251d;
+
+  --brand: 'Archivo Black', 'Arial Black', sans-serif;
+  --display: 'Big Shoulders Display', 'Arial Narrow', Impact, sans-serif;
+  --num: 'Anton', Impact, 'Arial Narrow', sans-serif;
+  --body: 'Archivo', 'Helvetica Neue', Arial, system-ui, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --marker: 'Permanent Marker', 'Marker Felt', cursive;
+
+  --gutter: max(16px, env(safe-area-inset-left, 0px));
+  --gutter-r: max(16px, env(safe-area-inset-right, 0px));
+}
+
+* { box-sizing: border-box; }
+html { background: var(--stage); }
+body {
+  margin: 0;
+  background: var(--stage);
+  color: var(--bone);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; height: auto; }
+a { color: var(--glow); text-underline-offset: 3px; }
+a:hover { color: var(--bone); }
+:focus-visible { outline: 2px solid var(--glow); outline-offset: 3px; }
+h1, h2, h3, h4 { font-family: var(--display); font-weight: 800; text-transform: uppercase; line-height: 1; text-wrap: balance; margin: 0; }
+p { margin: 0; }
+
+.wrap {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter-r);
+}
+.label { font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+
+/* Gaffer tape label, like the ones on a pedalboard */
+.tape {
+  display: inline-block;
+  font-family: var(--marker);
+  font-size: 15px;
+  line-height: 1.2;
+  color: var(--tape-ink);
+  background: var(--tape);
+  padding: 3px 12px 4px;
+  transform: rotate(-1.2deg);
+  clip-path: polygon(0 6%, 3% 0, 97% 4%, 100% 0, 99% 94%, 96% 100%, 4% 96%, 1% 100%);
+}
+.tape:nth-child(even) { transform: rotate(.9deg); }
+.tapes { display: flex; flex-wrap: wrap; gap: 10px 12px; }
+
+/* Amp grille texture on valve green */
+.grille {
+  background-color: var(--valve);
+  background-image: radial-gradient(circle at 50% 50%, #011a00 1.6px, transparent 2.2px);
+  background-size: 9px 9px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: 4px;
+  background: var(--valve);
+  border: 1px solid var(--glass);
+  color: var(--glow);
+  font-family: var(--mono);
+  font-size: 14px;
+  text-decoration: none;
+}
+.btn:hover { color: var(--bone); border-color: var(--glow); }
+
+/* ---------- Post body ---------- */
+.prose { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.1em; max-width: 68ch; min-width: 0; }
+.prose > * { margin: 0; }
+.prose h2 { font-size: clamp(28px, 4vw, 36px); margin-top: .8em; }
+.prose h3 { font-size: 24px; margin-top: .6em; }
+.prose ul, .prose ol { padding-left: 1.3em; display: grid; gap: .35em; }
+.prose code { font-family: var(--mono); font-size: .86em; background: var(--case-2); border: 1px solid var(--line); padding: 1px 6px; border-radius: 3px; }
+.prose pre { padding: 16px 18px; border-radius: 6px; border: 1px solid var(--line); overflow-x: auto; font-size: 14px; line-height: 1.55; }
+.prose pre code { background: none; border: 0; padding: 0; font-size: inherit; }
+.prose blockquote { border-left: 3px solid var(--glass); padding-left: 16px; color: var(--muted); }
+.prose img { border-radius: 6px; border: 1px solid var(--line); }
+.prose table { display: block; overflow-x: auto; border-collapse: collapse; font-size: 15px; }
+.prose th, .prose td { border: 1px solid var(--line); padding: 6px 10px; text-align: left; }
+.prose th { font-family: var(--mono); font-weight: 500; font-size: 13px; color: var(--muted); }
+.prose hr { border: 0; border-top: 1px solid var(--line); }

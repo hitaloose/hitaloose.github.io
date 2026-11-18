@@ -1,0 +1,60 @@
+---
+// The brand mark: an amp valve drawn as an 8-bit sprite.
+// `animated` warms it up on load, then it hums and a reflection sweeps the glass.
+interface Props {
+  size?: number;
+  animated?: boolean;
+  label?: string;
+}
+const { size = 48, animated = true, label } = Astro.props;
+const height = Math.round((size * 16) / 12);
+---
+<svg
+  class="valve"
+  width={size}
+  height={height}
+  viewBox="0 0 12 16"
+  shape-rendering="crispEdges"
+  role={label ? 'img' : undefined}
+  aria-label={label}
+  aria-hidden={label ? undefined : 'true'}
+  data-animated={animated ? '' : undefined}
+>
+  <path fill="#3f7f2a" fill-opacity=".2" d="M4 1h4v1h-4z M2 2h8v2h-8z M1 4h10v8h-10z">
+    {animated && <animate attributeName="fill-opacity" values=".04;.04;.12;.06;.2" keyTimes="0;.3;.5;.6;1" dur="1.6s" fill="freeze" />}
+  </path>
+  <path fill="#e8e3d3" fill-opacity=".5" d="M2 4h1v5h-1z" />
+  <path fill="#e8e3d3" fill-opacity=".85" d="M3 2h1v1h-1z" />
+  <path fill="#e8e3d3" fill-opacity=".2" d="M10 6h1v3h-1z M4 1h1v1h-1z" />
+  <path fill="#3f7f2a" d="M4 0h4v1h-4z M2 1h2v1h-2z M8 1h2v1h-2z M1 2h1v2h-1z M10 2h1v2h-1z M0 4h1v8h-1z M11 4h1v8h-1z M0 12h12v2h-12z" />
+  <path fill="#1c4512" d="M1 13h10v1h-10z" />
+  <path fill="#a8e07f" d="M4 3h4v1h-4z M3 4h1v5h-1z M8 4h1v5h-1z M4 9h4v1h-4z">
+    {animated && <animate attributeName="opacity" values="0;.5;.15;.75;.35;1" keyTimes="0;.2;.3;.5;.65;1" calcMode="discrete" dur="1.6s" fill="freeze" />}
+    {animated && <animate attributeName="opacity" values="1;.78;1;.9;1" keyTimes="0;.3;.5;.55;1" dur="3.2s" begin="1.6s" repeatCount="indefinite" />}
+  </path>
+  <path fill="#e8e3d3" d="M5 5h2v3h-2z">
+    {animated && <animate attributeName="fill" values="#0e2a08;#1c4512;#3f7f2a;#a8e07f;#e8e3d3" calcMode="discrete" dur="2s" fill="freeze" />}
+    {animated && <animate attributeName="opacity" values="1;.82;1" dur="3.2s" begin="2s" repeatCount="indefinite" />}
+  </path>
+  <path fill="#e8e3d3" d="M1 14h1v2h-1z M4 14h1v2h-1z M7 14h1v2h-1z M10 14h1v2h-1z" />
+  {animated && (
+    <rect x="-3" y="4" width="1" height="8" fill="#e8e3d3" fill-opacity=".28">
+      <animate attributeName="x" values="-3;1;2;3;4;5;6;7;8;9;10;-3" keyTimes="0;.85;.865;.88;.895;.91;.925;.94;.955;.97;.985;1" calcMode="discrete" dur="7s" begin="1s" repeatCount="indefinite" />
+    </rect>
+  )}
+</svg>
+
+<style>
+  .valve { display: block; flex: none; filter: drop-shadow(0 0 6px rgba(168, 224, 127, .28)); }
+  @media (prefers-reduced-motion: no-preference) {
+    .valve[data-animated] { animation: warm 1.6s steps(6) both, hum 3.2s ease-in-out 1.6s infinite; }
+  }
+  @keyframes warm {
+    from { filter: drop-shadow(0 0 0 rgba(168, 224, 127, 0)); }
+    to { filter: drop-shadow(0 0 7px rgba(168, 224, 127, .3)); }
+  }
+  @keyframes hum {
+    0%, 100% { filter: drop-shadow(0 0 7px rgba(168, 224, 127, .3)); }
+    50% { filter: drop-shadow(0 0 11px rgba(168, 224, 127, .42)); }
+  }
+</style>

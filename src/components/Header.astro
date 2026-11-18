@@ -1,0 +1,35 @@
+---
+import Valve from './Valve.astro';
+const path = Astro.url.pathname;
+const links = [
+  { href: '/', label: 'Builds', active: path === '/' || path.startsWith('/builds') },
+  { href: '/about/', label: 'About', active: path.startsWith('/about') },
+  { href: '/rss.xml', label: 'RSS', active: false },
+];
+---
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/" aria-label="Hitalo Loose, home">
+      <Valve size={26} />
+      <span class="wordmark">Hitalo Loose</span>
+    </a>
+    <nav aria-label="Main">
+      <ul>
+        {links.map((l) => (
+          <li><a href={l.href} aria-current={l.active ? 'page' : undefined}>{l.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header { border-bottom: 1px solid var(--line); }
+  .bar { display: flex; justify-content: space-between; align-items: center; gap: 12px 24px; flex-wrap: wrap; padding-block: 16px; }
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--bone); min-height: 44px; }
+  .wordmark { font-family: var(--brand); font-size: 21px; text-transform: uppercase; letter-spacing: -.01em; line-height: 1; }
+  ul { list-style: none; display: flex; gap: 22px; margin: 0; padding: 0; flex-wrap: wrap; }
+  nav a { display: inline-block; padding-block: 10px; font-family: var(--display); font-weight: 700; font-size: 18px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); text-decoration: none; border-bottom: 2px solid transparent; }
+  nav a:hover { color: var(--bone); }
+  nav a[aria-current='page'] { color: var(--bone); border-bottom-color: var(--glow); }
+</style>

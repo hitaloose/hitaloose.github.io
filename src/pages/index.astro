@@ -1,0 +1,92 @@
+---
+import Base from '../layouts/Base.astro';
+import { getPosts, formatDate, pad } from '../data/posts';
+import { projects } from '../data/projects';
+
+const posts = await getPosts();
+---
+<Base>
+  <section class="hero grille">
+    <div class="wrap inner">
+      <h1>Gear, games and <em>code</em>, built by hand.</h1>
+      <p>I'm Hitalo, a backend engineer from Dois Vizinhos, Brazil. After work I build tools around music and games: pedal controllers, handheld ports, terminal apps. This is where I write them up.</p>
+      <div class="tapes"><span class="tape">guitar rigs</span><span class="tape">handhelds</span><span class="tape">terminals</span></div>
+    </div>
+  </section>
+
+  <section class="wrap setlist" aria-labelledby="setlist-title">
+    <h2 id="setlist-title" class="marker">Setlist</h2>
+    {posts.length === 0 ? (
+      <p class="empty">The first write-up is still on the bench. Follow the <a href="/rss.xml">RSS feed</a> to get it when it's out.</p>
+    ) : (
+      <ol class="posts" reversed>
+        {posts.map((post) => (
+          <li class="post">
+            <span class="no">{pad(post.data.number)}</span>
+            <div>
+              <h3><a href={`/builds/${post.id}/`}>{post.data.title}</a></h3>
+              <p>{post.data.description}</p>
+              <div class="meta">
+                {post.data.stack[0] && <b>{post.data.stack[0]}</b>}
+                {post.data.stack.length > 1 && <span>{post.data.stack.slice(1).join(' · ')}</span>}
+                <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
+                {post.data.draft && <span class="draft">draft</span>}
+              </div>
+            </div>
+          </li>
+        ))}
+      </ol>
+    )}
+  </section>
+
+  <section class="wrap bench" aria-labelledby="bench-title">
+    <h2 id="bench-title" class="marker">On the bench</h2>
+    <ul class="projects">
+      {projects.map((p) => (
+        <li class="project">
+          <h3><a href={p.repo}>{p.name}</a></h3>
+          <p>{p.summary}</p>
+          <div class="meta">
+            <b>{p.stack}</b>
+            <a href={p.repo}>Code</a>
+            {p.demo && <a href={p.demo}>Try it</a>}
+          </div>
+        </li>
+      ))}
+    </ul>
+  </section>
+</Base>
+
+<style>
+  .hero { border-bottom: 1px solid var(--glass); }
+  .inner { padding-block: 56px 48px; display: grid; gap: 18px; }
+  h1 { font-size: clamp(44px, 8vw, 88px); font-weight: 900; line-height: .92; max-width: 13ch; }
+  h1 em { font-style: normal; color: var(--glow); }
+  .inner p { max-width: 56ch; font-size: 18px; color: var(--bone); opacity: .88; }
+
+  .marker { font-family: var(--marker); font-weight: 400; text-transform: none; font-size: 26px; color: var(--tape); transform: rotate(-1deg); width: fit-content; }
+  .setlist { padding-block: 40px 8px; display: grid; gap: 12px; }
+  .empty { color: var(--muted); padding-block: 16px; }
+  .posts { list-style: none; margin: 0; padding: 0; }
+  .post { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 6px 22px; padding-block: 22px; border-top: 1px solid var(--line); }
+  .no { font-family: var(--num); font-size: 40px; line-height: .9; color: var(--glow); font-variant-numeric: tabular-nums; }
+  .post > div, .project { display: grid; gap: 8px; min-width: 0; }
+  .post h3, .project h3 { font-size: 30px; letter-spacing: .01em; }
+  .post h3 a, .project h3 a { color: var(--bone); text-decoration: none; }
+  .post h3 a:hover, .project h3 a:hover { color: var(--glow); }
+  .post p, .project p { color: var(--muted); font-size: 16px; max-width: 62ch; }
+  .meta { font-family: var(--mono); font-size: 13px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 6px 16px; }
+  .meta b { color: var(--glow); font-weight: 500; }
+  .draft { color: var(--tape-ink); background: var(--tape); padding: 0 6px; }
+
+  .bench { padding-block: 40px 0; display: grid; gap: 12px; }
+  .projects { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+  .project { background: var(--case); padding: 22px; align-content: start; }
+  .project h3 { font-size: 26px; overflow-wrap: anywhere; }
+  .project:last-child:nth-child(odd) { grid-column: 1 / -1; }
+
+  @media (max-width: 640px) {
+    .post { grid-template-columns: minmax(0, 1fr); }
+    .projects { grid-template-columns: minmax(0, 1fr); }
+  }
+</style>

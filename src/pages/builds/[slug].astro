@@ -1,0 +1,50 @@
+---
+import { render, type CollectionEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { getPosts, formatDate, pad, readingMinutes } from '../../data/posts';
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props as { post: CollectionEntry<'posts'> };
+const { Content } = await render(post);
+const { title, description, pubDate, number, stack, repo, demo, draft } = post.data;
+---
+<Base title={title} description={description} type="article">
+  <article class="wrap article">
+    <a class="back" href="/">← Setlist</a>
+    <span class="issue">Nº {pad(number)}{draft && ' · draft'}</span>
+    <h1>{title}</h1>
+    <div class="meta">
+      <time datetime={pubDate.toISOString()}>{formatDate(pubDate)}</time>
+      <span>{readingMinutes(post.body)} min read</span>
+    </div>
+    {stack.length > 0 && (
+      <div class="tapes" aria-label="Spec sheet">
+        {stack.map((s) => <span class="tape">{s}</span>)}
+      </div>
+    )}
+    {(repo || demo) && (
+      <div class="actions">
+        {repo && <a class="btn" href={repo}>Source code →</a>}
+        {demo && <a class="btn" href={demo}>Try it →</a>}
+      </div>
+    )}
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+</Base>
+
+<style>
+  .article { padding-block: 40px 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 22px; max-width: 800px; }
+  .back { font-family: var(--mono); font-size: 13px; color: var(--muted); text-decoration: none; width: fit-content; }
+  .back:hover { color: var(--glow); }
+  .issue { font-family: var(--num); color: var(--glow); font-size: 22px; letter-spacing: .04em; }
+  h1 { font-size: clamp(38px, 6vw, 64px); font-weight: 900; line-height: .95; }
+  .meta { display: flex; flex-wrap: wrap; gap: 6px 16px; font-family: var(--mono); font-size: 13px; color: var(--muted); }
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+  .prose { margin-top: 8px; }
+</style>

@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+import Valve from '../components/Valve.astro';
+---
+<Base title="Not found">
+  <section class="wrap nf">
+    <Valve size={72} animated={false} />
+    <h1>Blown valve</h1>
+    <p>There's nothing at this address. It may have moved, or the link has a typo.</p>
+    <a class="btn" href="/">Back to the setlist</a>
+  </section>
+</Base>
+
+<style>
+  .nf { padding-block: 72px 0; display: grid; gap: 20px; justify-items: start; }
+  h1 { font-size: clamp(44px, 7vw, 72px); font-weight: 900; }
+  p { color: var(--muted); }
+  .nf :global(.valve) { opacity: .55; filter: grayscale(1); }
+</style>
