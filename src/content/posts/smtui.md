@@ -8,9 +8,9 @@ repo: 'https://github.com/hitaloose/smtui'
 draft: true
 ---
 
-<!-- TODO (Hitalo): one or two lines in your own words on why you built it. What was annoying before smtui? -->
+I built smtui for my day job. I look after three servers over SSH, and a lot of that work is managing files and folders by hand: copying, moving, compressing, cleaning up, and pulling files back to my own machine. I wanted the ease of a desktop file manager without leaving the server, so I made one. I've used it every day since, and it has made that work much faster.
 
-My usual way into a server looks like this:
+Now my usual way into any of those servers looks like this:
 
 ```sh
 ssh deploy@edge1
@@ -53,4 +53,6 @@ set -g set-clipboard on    # let "Copy scp command" reach your clipboard
 
 The [README](https://github.com/hitaloose/smtui#readme) has the full list of keys and the iTerm2 settings for right click.
 
-<!-- TODO (Hitalo): what you'd like to add next, or what you learned building it in Rust. -->
+## Why Rust
+
+It was great to see Rust pay off in practice. The whole tool, terminal emulator included, ships as a single lightweight binary: copy it to the server and it runs, with no runtime or dependencies to install. For a tool like this, that makes Rust my default choice.
