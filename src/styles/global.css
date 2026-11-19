@@ -14,12 +14,13 @@
   --tape: #d9d2bd;
   --tape-ink: #23251d;
 
-  --brand: 'Anton', Impact, 'Arial Narrow', sans-serif;
-  --display: 'Big Shoulders Display', 'Arial Narrow', Impact, sans-serif;
-  --num: 'Anton', Impact, 'Arial Narrow', sans-serif;
-  --body: 'Archivo', 'Helvetica Neue', Arial, system-ui, sans-serif;
-  --mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
-  --marker: 'Permanent Marker', 'Marker Felt', cursive;
+  /* Families and fallbacks are defined in astro.config.mjs (fonts). */
+  --brand: var(--font-anton);
+  --display: var(--font-big-shoulders);
+  --num: var(--font-anton);
+  --body: var(--font-archivo);
+  --mono: var(--font-plex-mono);
+  --marker: var(--font-marker);
 
   --gutter: max(16px, env(safe-area-inset-left, 0px));
   --gutter-r: max(16px, env(safe-area-inset-right, 0px));
