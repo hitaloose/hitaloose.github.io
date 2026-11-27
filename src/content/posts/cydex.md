@@ -13,7 +13,7 @@ CYDex is a Dex that sits on my desk. It runs on the ESP32-2432S028, the board ev
 Everything runs on the board. There's no server, no cloud and no account.
 
 <p>
-  <img src="https://raw.githubusercontent.com/hitaloose/cydex/main/docs/img/vitrine.png" alt="Showcase mode: a trading card with the sprite, types, measurements and base stats" width="420">
+  <img src="https://raw.githubusercontent.com/hitaloose/cydex/main/docs/img/showcase.png" alt="Showcase mode: a trading card with the sprite, types, measurements and base stats" width="420">
 </p>
 
 ## The whole catalog, on a microcontroller
@@ -22,8 +22,8 @@ The catalog covers nine generations, shown as a list or a 5×2 sprite grid. You 
 
 <p>
   <img src="https://raw.githubusercontent.com/hitaloose/cydex/main/docs/img/menu.png" alt="Home screen with the caught progress bar" width="260">
-  <img src="https://raw.githubusercontent.com/hitaloose/cydex/main/docs/img/grade.png" alt="Sprite grid, ten per page" width="260">
-  <img src="https://raw.githubusercontent.com/hitaloose/cydex/main/docs/img/ficha.png" alt="Species entry with a 96 px sprite" width="260">
+  <img src="https://raw.githubusercontent.com/hitaloose/cydex/main/docs/img/grid.png" alt="Sprite grid, ten per page" width="260">
+  <img src="https://raw.githubusercontent.com/hitaloose/cydex/main/docs/img/entry.png" alt="Species entry with a 96 px sprite" width="260">
 </p>
 
 Progress comes from real saves. Drop your Gen 3 saves (FireRed/LeafGreen, Ruby/Sapphire/Emerald) in `/saves` on the SD card and the board parses them itself to see what you've seen and caught. Species you haven't met yet stay a mystery: the name becomes `???` and the stats tabs are locked.
@@ -58,8 +58,8 @@ curl -4 http://cydex.local/notices \
 Notices have colors, icons, priorities and timeouts. Sending the same `id` again updates the notice instead of adding a new one, so one build or one chat keeps a single entry. Outside the showcase the most important notice shows up as a banner over the current screen. On the showcase they stack as speech bubbles next to the sprite.
 
 <p>
-  <img src="https://raw.githubusercontent.com/hitaloose/cydex/main/docs/img/aviso.png" alt="Notice banner over the list" width="320">
-  <img src="https://raw.githubusercontent.com/hitaloose/cydex/main/docs/img/vitrine-aviso.png" alt="Notices as speech bubbles on the showcase" width="320">
+  <img src="https://raw.githubusercontent.com/hitaloose/cydex/main/docs/img/notices.png" alt="Notice banner over the home screen" width="320">
+  <img src="https://raw.githubusercontent.com/hitaloose/cydex/main/docs/img/showcase-notice.png" alt="Notices as speech bubbles on the showcase" width="320">
 </p>
 
 The integration I use most is **Claude Code**. The repo ships hooks that tell the display when Claude needs a permission, is waiting for me or has finished, and clear the notice once I'm back at the terminal. Only the status goes over the network. Prompts never leave the computer.
